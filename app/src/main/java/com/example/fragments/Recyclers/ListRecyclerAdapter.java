@@ -1,35 +1,27 @@
 package com.example.fragments.Recyclers;
 
 
-import static com.example.fragments.Config.DefaultConstants.BASE_IMG_URL;
-
 import android.content.Context;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.fragments.DetailFragment;
-import com.example.fragments.Model.Film.Film;
 import com.example.fragments.Model.List.List;
+import com.example.fragments.Model.List.ListResult;
 import com.example.fragments.R;
 
 import java.util.ArrayList;
 
-public class AddMovieListsRecyclerViewAdapter extends RecyclerView.Adapter<AddMovieListsRecyclerViewAdapter.ViewHolder> {
-    private ArrayList<List> arrayList;
+public class ListRecyclerAdapter extends RecyclerView.Adapter<ListRecyclerAdapter.ViewHolder> {
+    private ArrayList<ListResult> arrayList;
     private Context context;
 
-    public AddMovieListsRecyclerViewAdapter(ArrayList<List> arrN, Context c){
+    public ListRecyclerAdapter(ArrayList<ListResult> arrN, Context c){
         this.arrayList = arrN;
         this.context = c;
     }
@@ -45,16 +37,8 @@ public class AddMovieListsRecyclerViewAdapter extends RecyclerView.Adapter<AddMo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int i) {
 
-        holder.listTitle.setText(arrayList.get(i).getTitle());
-        holder.itemCount.setText(String.valueOf(arrayList.get(i).getCount()));
-
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.i("select", arrayList.get(i).getTitle());
-            }
-        });
-
+        holder.listTitle.setText(arrayList.get(i).getName());
+        holder.itemCount.setText(arrayList.get(i).getDescription());
 
     }
 

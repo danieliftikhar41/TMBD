@@ -1,6 +1,10 @@
 package com.example.fragments;
 
+import static com.example.fragments.Config.DefaultConstants.ACCOUNT_ID;
+import static com.example.fragments.Config.DefaultConstants.API_KEY;
 import static com.example.fragments.Config.DefaultConstants.BASE_IMG_URL;
+import static com.example.fragments.Config.DefaultConstants.SESSION_ID;
+import static com.example.fragments.Config.DefaultConstants.retrofit;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -11,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,17 +24,25 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.fragments.Config.ApiCall;
 import com.example.fragments.Config.GlideApp;
+import com.example.fragments.Model.Film.AccountStates;
 import com.example.fragments.Model.Film.Film;
+import com.example.fragments.Model.Film.searchFilmModel;
 import com.example.fragments.Model.List.List;
 import com.example.fragments.Recyclers.AddMovieListsRecyclerViewAdapter;
 
 import java.util.ArrayList;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 
 public class DetailFragment extends Fragment {
 
-
+    boolean fav;
+    ApiCall apiCall;
     public DetailFragment() {
         // Required empty public constructor
     }
@@ -57,11 +70,61 @@ public class DetailFragment extends Fragment {
                 .load(BASE_IMG_URL + film.getPoster_path())
                 .centerCrop()
                 .into(imgDetail);
+        apiCall = retrofit.create(ApiCall.class);
+        Call<AccountStates> favcall = apiCall.account_state(film.getId(),API_KEY,SESSION_ID);
+        favcall.enqueue(new Callback<AccountStates>(){
+            @Override
+            public void onResponse(Call<AccountStates> favcall, Response<AccountStates> response) {
+                if(response.code()!=200){
+                    Log.i("testApi", "checkConnection");
+                    Log.i("testApi", response.message());
+                    return;
+                }else {
+                    Log.i("testApi", "done");
+                    fav=response.body().getFavorite();
+                    if(fav){
+                        btnFav.setImageResource(R.drawable.ic_fav_on);
+                    }else{
+                        btnFav.setImageResource(R.drawable.ic_fav_off);
+                    }
+                }
+            }
 
+            @Override
+            public void onFailure(Call<AccountStates> call, Throwable t) {
+
+            }
+        });
         btnFav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                btnFav.setImageResource(R.drawable.ic_fav_on);
+
+                apiCall = retrofit.create(ApiCall.class);
+                boolean nFav=!fav;
+                Call<searchFilmModel> call= apiCall.setFav(ACCOUNT_ID,API_KEY,SESSION_ID,"movie", film.getId(), nFav);;
+
+                call.enqueue(new Callback<searchFilmModel>(){
+                    @Override
+                    public void onResponse(Call<searchFilmModel> call, Response<searchFilmModel> response) {
+
+                        if(response.isSuccessful()){
+
+                            if(fav){
+                                btnFav.setImageResource(R.drawable.ic_fav_off);
+
+                            }else{
+                                btnFav.setImageResource(R.drawable.ic_fav_on);
+                            }
+
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<searchFilmModel> call, Throwable t) {
+
+                    }
+                });
             }
         });
 

@@ -28,8 +28,8 @@ import retrofit2.Response;
 
 public class SearchFragment extends Fragment {
 
-    public View view;
-    RecyclerView recyclerView;
+        public View view;
+        RecyclerView recyclerView;
 
     public SearchFragment() {
         // Required empty public constructor
