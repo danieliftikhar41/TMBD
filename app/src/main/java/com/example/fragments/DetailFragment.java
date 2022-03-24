@@ -27,6 +27,7 @@ import android.widget.TextView;
 import com.example.fragments.Config.ApiCall;
 import com.example.fragments.Config.GlideApp;
 import com.example.fragments.Model.Film.AccountStates;
+import com.example.fragments.Model.Film.FavFilmRequest;
 import com.example.fragments.Model.Film.Film;
 import com.example.fragments.Model.Film.searchFilmModel;
 import com.example.fragments.Model.List.List;
@@ -102,12 +103,13 @@ public class DetailFragment extends Fragment {
                 apiCall = retrofit.create(ApiCall.class);
                 boolean nFav=!fav;
                 Log.i("testApi", ""+nFav);
-                Call<searchFilmModel> call= apiCall.setFav(ACCOUNT_ID,API_KEY,SESSION_ID,"movie", film.getId(), nFav);;
+                FavFilmRequest favFilmRequest = new FavFilmRequest("movie", film.getId(), nFav);
+                Call<searchFilmModel> call= apiCall.setFav(ACCOUNT_ID,API_KEY,SESSION_ID,favFilmRequest);;
 
                 call.enqueue(new Callback<searchFilmModel>(){
                     @Override
                     public void onResponse(Call<searchFilmModel> call, Response<searchFilmModel> response) {
-
+                        Log.i("testApi", response.code() + " - ");
                         if(response.isSuccessful()){
 
                             if(fav){

@@ -1,6 +1,7 @@
 package com.example.fragments.Config;
 
 import com.example.fragments.Model.Film.AccountStates;
+import com.example.fragments.Model.Film.FavFilmRequest;
 import com.example.fragments.Model.Film.searchFilmModel;
 
 import com.example.fragments.Model.List.List;
@@ -19,7 +20,7 @@ public interface ApiCall {
     @GET("account/{account_id}/favorite/movies?")
     Call<searchFilmModel> getFev(@Path("account_id") String account_id,@Query("api_key") String api_key,@Query("session_id") String session_id );
     @POST("account/{account_id}/favorite?")
-    Call<searchFilmModel> setFav(@Path("account_id") String account_id,@Query("api_key") String api_key,@Query("session_id") String session_id,@Query("media_type") String media_type,@Query("media_id") Integer media_id,@Query("favorite") boolean favorite);
+    Call<searchFilmModel> setFav(@Path("account_id") String account_id,@Query("api_key") String api_key,@Query("session_id") String session_id, @Body FavFilmRequest favFilmRequest);
     @POST("list?")
     Call<searchFilmModel> setList(@Query("api_key") String api_key,@Query("session_id") String session_id ,@Body List list);
     @GET("movie/{movie_id}/account_states?")
