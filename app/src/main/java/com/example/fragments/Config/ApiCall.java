@@ -17,7 +17,7 @@ public interface ApiCall {
     @GET("search/movie?")
     Call<searchFilmModel> getData(@Query("api_key") String api_key, @Query("query") String query);
     @GET("account/{account_id}/favorite/movies?")
-    Call<searchFilmModel> getFev(@Path("account_id") String account_id,@Query(" ") String api_key,@Query("session_id") String session_id );
+    Call<searchFilmModel> getFev(@Path("account_id") String account_id,@Query("api_key") String api_key,@Query("session_id") String session_id );
     @POST("account/{account_id}/favorite?")
     Call<searchFilmModel> setFav(@Path("account_id") String account_id,@Query("api_key") String api_key,@Query("session_id") String session_id,@Query("media_type") String media_type,@Query("media_id") Integer media_id,@Query("favorite") boolean favorite);
     @POST("list?")

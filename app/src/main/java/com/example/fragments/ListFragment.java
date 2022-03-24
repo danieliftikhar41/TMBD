@@ -56,7 +56,7 @@ public class ListFragment extends Fragment {
         FloatingActionButton btnAdd = view.findViewById(R.id.btnAddList);
         ApiCall apiCall = retrofit.create(ApiCall.class);
         Call<ListModel> call = apiCall.getList(ACCOUNT_ID,API_KEY,SESSION_ID);
-
+        recyclerView = view.findViewById(R.id.recyclerLists);
         call.enqueue(new Callback<ListModel>(){
             @Override
             public void onResponse(Call<ListModel> call, Response<ListModel> response) {
@@ -65,7 +65,6 @@ public class ListFragment extends Fragment {
                     Log.i("testApi", response.message());
                     return;
                 }else {
-                    recyclerView = view.findViewById(R.id.recyclerList);
                     Log.i("testApi", ""+response.body().getResults().size());
                     ArrayList<ListResult> arrayList = new ArrayList<>();
                     arrayList = response.body().getResults();
@@ -142,6 +141,7 @@ public class ListFragment extends Fragment {
     public void callRecycler(ArrayList<ListResult> arrayList){
 
         ListRecyclerAdapter adapter = new ListRecyclerAdapter(arrayList, getContext());
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(),3));
         recyclerView.setAdapter(adapter);
     }
 }

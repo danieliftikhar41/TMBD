@@ -36,10 +36,8 @@ public class ListRecyclerAdapter extends RecyclerView.Adapter<ListRecyclerAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int i) {
-
         holder.listTitle.setText(arrayList.get(i).getName());
         holder.itemCount.setText(arrayList.get(i).getDescription());
-
     }
 
     @Override
@@ -50,7 +48,6 @@ public class ListRecyclerAdapter extends RecyclerView.Adapter<ListRecyclerAdapte
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView listTitle;
         TextView itemCount;
-
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             listTitle = itemView.findViewById(R.id.listTitle);

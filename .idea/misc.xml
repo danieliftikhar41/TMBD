@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Hostienda/Documents/tmbd/TMBD/app/src/main/res/layout/form_movie_to_list.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/Hostienda/Documents/tmbd/TMBD/app/src/main/res/layout/fragment_list.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/Hostienda/Documents/tmbd/TMBD/app/src/main/res/layout/fragment_movies_list.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/Hostienda/Documents/tmbd/TMBD/app/src/main/res/layout/fragment_search.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/User/Documents/M7/BottomNavigation_Fragments/app/src/main/res/layout/form_add_list.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/User/Documents/M7/BottomNavigation_Fragments/app/src/main/res/layout/form_movie_to_list.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/User/Documents/M7/BottomNavigation_Fragments/app/src/main/res/layout/fragment_detail.xml" value="0.1" />

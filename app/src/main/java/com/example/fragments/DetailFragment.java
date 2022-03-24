@@ -101,6 +101,7 @@ public class DetailFragment extends Fragment {
 
                 apiCall = retrofit.create(ApiCall.class);
                 boolean nFav=!fav;
+                Log.i("testApi", ""+nFav);
                 Call<searchFilmModel> call= apiCall.setFav(ACCOUNT_ID,API_KEY,SESSION_ID,"movie", film.getId(), nFav);;
 
                 call.enqueue(new Callback<searchFilmModel>(){

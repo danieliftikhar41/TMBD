@@ -59,7 +59,7 @@ public class MoviesListFragment extends Fragment {
             public void onResponse(Call<searchFilmModel> call, Response<searchFilmModel> response) {
                 if(response.code()!=200){
                     Log.i("testApi", "checkConnection");
-                    Log.i("testApi", response.message());
+                    Log.i("testApi", ""+response.code());
                     return;
                 }else {
                     Log.i("testApi", ""+response.body().getResults());
